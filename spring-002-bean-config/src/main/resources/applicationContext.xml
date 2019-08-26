@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    通过全类名的方式来配置bean：
+
+    id：Bean的名称
+    在IOC容器中必须是唯一的
+    若id没有指定，Spring自动将权限定性类名作为bean的名字
+    id可以指定多个名字，名字之间可用逗号、分号、或空格分隔
+
+    class：bean的全类名，通过反射的方式在IOC容器中创建Bean,所以要求bean中必须有无参数的构造器
+    -->
+    <bean id="helloWorld" class="zzc.spring.beans.HelloWorld">
+        <property name="name" value="Spring"/>
+    </bean>
+
+    <!--
+    <bean id="helloWorld2" class="zzc.spring.beans.HelloWorld">
+        <property name="name" value="Spring"/>
+    </bean>
+    -->
+
+    <!-- 通过构造方法来配置bean的属性 -->
+    <bean id="car" class="zzc.spring.beans.Car">
+        <constructor-arg value="AUdi" name="brand"></constructor-arg>
+        <constructor-arg value="ShangHai" name="corp"></constructor-arg>
+        <constructor-arg value="300000" name="price"></constructor-arg>
+    </bean>
+
+    <bean id="car2" class="zzc.spring.beans.Car">
+        <constructor-arg value="Baoma" name="brand"></constructor-arg>
+        <!-- 如果字面值包含特殊字符可以使用<![CDATA[]]> 包裹起来 -->
+        <!-- 属性值也可以使用value子节点进行配置 -->
+        <constructor-arg name="corp">
+            <value><![CDATA[<ShangHai>]]></value>
+        </constructor-arg>
+        <constructor-arg name="maxSpeed">
+            <value>250</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="person" class="zzc.spring.beans.Person">
+        <property name="name" value="ZhaoZhiCheng"/>
+        <property name="age" value="24"/>
+        <!-- 可以使用的property的ref属性建立 bean之间的引用关系 -->
+        <!--<property name="car" ref="car2"/>-->
+        <!--
+        <property name="car">
+            <ref bean="car2"/>
+        </property>
+        -->
+        <!-- 内部bean，不能被外部引用，只能在内部使用 -->
+        <property name="car">
+            <bean class="zzc.spring.beans.Car">
+                <constructor-arg value="Ford" name="brand"></constructor-arg>
+                <constructor-arg value="ChangAn" name="corp"></constructor-arg>
+                <constructor-arg value="200000" name="price"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="person2" class="zzc.spring.beans.Person">
+        <constructor-arg value="Knight"/>
+        <constructor-arg value="18"/>
+        <!--<constructor-arg ref="car"/>-->
+        <!-- 测试赋值null
+        <constructor-arg index="2">
+            <null/>
+        </constructor-arg> -->
+        <constructor-arg ref="car"/>
+        <!-- 为级联属性赋值，注意：属性需要先初始化后才可以为级联属性赋值，否则会有异常，和Struts2不同 -->
+        <property name="car.maxSpeed" value="200"/>
+    </bean>
+
+</beans>

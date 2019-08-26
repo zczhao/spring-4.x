@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>zzc.spring</groupId>
+    <artifactId>spring-4.x</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring-001-helloworld</module>
+        <module>spring-002-bean-config</module>
+        <module>spring-003-bean-di</module>
+        <module>spring-004-bean-di-collection</module>
+        <module>spring-005-bean-autowire</module>
+        <module>spring-006-bean-relation</module>
+        <module>spring-007-bean-scope</module>
+        <module>spring-008-bean-properties</module>
+        <module>spring-009-spel</module>
+        <module>spring-010-bean-life-cycle</module>
+        <module>spring-011-di-generic</module>
+        <module>spring-012-aop</module>
+        <module>spring-013-jdbc</module>
+        <module>spring-014-transaction</module>
+        <module>spring-015-hibernate</module>
+        <module>spring-016-web</module>
+        <module>spring-017-web</module>
+        <module>spring-018-struts2</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!-- 统一字符集编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!-- 指定编译版本 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
+        <junit.version>4.12</junit.version>
+        <spring.version>4.3.20.RELEASE</spring.version>
+        <hibernate.version>5.3.7.Final</hibernate.version>
+        <struts2.version>2.5.18</struts2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!--
+                spring-context
+                    |- spring-aop
+                    |-spring-beans
+                    |-spring-core
+                        |-commons-logging
+                    |-spring-expression
+            -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- AOP 需引入的包 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!--
+                整合Hibernate
+                spring-orm
+                    |- spring-beans
+                    |- spring-core
+                    |- spring-jdbc
+                    |- spring-tx
+            -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- 整合WEB -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.2</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>0.9.5.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.47</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-core</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-spring-plugin</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>

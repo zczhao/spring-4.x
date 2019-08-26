@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="personService" class="zzc.spring.struts2.services.PersonService"/>
+
+    <!-- 注意：在IOC容器中配置Struts2中Action进，需要配置scope属性，其值必须为prototype -->
+    <bean id="personAction" class="zzc.spring.struts2.Actions.PersonAction" scope="prototype">
+        <property name="personService" ref="personService"/>
+    </bean>
+
+</beans>

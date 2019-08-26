@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <!-- 测试如何配置集合属性-->
+    <bean id="car3" class="zzc.spring.beans.Car">
+        <property value="AUdi" name="brand"/>
+        <property value="ShangHai" name="corp"/>
+        <property value="300000" name="price"/>
+    </bean>
+
+    <bean id="car4" class="zzc.spring.beans.Car">
+        <property value="Baoma" name="brand"/>
+        <property value="ShangHai" name="corp"/>
+        <property value="500000" name="price"/>
+    </bean>
+
+    <bean id="person3" class="zzc.spring.beans.Person">
+        <property name="name" value="ZhaoZhiCheng"/>
+        <property name="age" value="18"/>
+        <property name="cars">
+            <!-- 使用list节点为 list类型的属性赋值 -->
+            <list>
+                <ref bean="car3"/>
+                <ref bean="car4"/>
+                <bean class="zzc.spring.beans.Car">
+                    <property value="Ford" name="brand"/>
+                    <property value="ChangAN" name="corp"/>
+                    <property value="200000" name="price"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置Map属性值 -->
+    <bean id="newPerson" class="zzc.spring.beans.NewPerson">
+        <property name="name" value="ZhaoZhiCheng"/>
+        <property name="age" value="18"/>
+        <property name="cars">
+            <!-- 使用map节点及map的entry子节点配置 map类型的成员变量 -->
+            <map>
+                <entry key="AA" value-ref="car3"/>
+                <entry key="BB" value-ref="car4"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 配置Properties 属性值 -->
+    <bean id="dataSource" class="zzc.spring.beans.DataSource">
+        <property name="properties">
+            <!-- 使用props和prop子节点来为Properties属性赋值 -->
+            <props>
+                <prop key="user">root</prop>
+                <prop key="password">1234</prop>
+                <prop key="jdbcUrl">jdbc:mysql:///test</prop>
+                <prop key="driverClass">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 配置单例的集合bean，以供多个bean 进行引用,需要导入util命名空间 -->
+    <util:list id="cars">
+        <ref bean="car3"/>
+        <ref bean="car4"/>
+    </util:list>
+
+    <bean id="person4" class="zzc.spring.beans.Person">
+        <property name="name" value="ZhaoZhiCheng"/>
+        <property name="age" value="18"/>
+        <property name="cars" ref="cars"/>
+    </bean>
+
+    <!-- 通过p命名空间为bean的属性赋值，需要先导入p命名空间,相对于传统的方式更加的简洁 -->
+    <bean id="person5" class="zzc.spring.beans.Person" p:name="ZhaoZhiCheng" p:age="18" p:cars-ref="cars"/>
+
+</beans>

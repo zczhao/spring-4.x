@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    通过全类名的方式来配置bean：
+    id：Bean的名称
+    在IOC容器中必须是唯一的
+    若id没有指定，Spring自动将权限定性类名作为bean的名字
+    id可以指定多个名字，名字之间可用逗号、分号、或空格分隔
+    -->
+    <bean id="helloWorld" class="zzc.spring.beans.HelloWorld">
+        <property name="name" value="Spring"/>
+    </bean>
+</beans>
